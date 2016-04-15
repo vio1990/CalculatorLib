@@ -2,14 +2,16 @@ package com.ozerian.lib.calculator.model;
 
 import com.ozerian.lib.calculator.interfaces.CalculatorAdditon;
 import com.ozerian.lib.calculator.interfaces.CalculatorSubstraction;
+import com.sun.xml.internal.ws.message.stream.StreamAttachment;
 
 public final class Calculator implements CalculatorAdditon, CalculatorSubstraction {
 
-    public void handleInputData(String inputData) {
+    public String handleAndCalculate(String inputData) {
 
         int number = 0;
         int firstNumber = 0;
         int secondNumber = 0;
+
         String operationIndicator = null;
 
         for (int i = 0; i < inputData.length(); i++) {
@@ -27,6 +29,7 @@ public final class Calculator implements CalculatorAdditon, CalculatorSubstracti
                 firstNumber = number;
                 number = 0;
             } else if (inputUnit == '.' || inputUnit == ',') {
+                double doubleValue = (double) number;
 
             } else {
                 // throw new Exception
@@ -38,6 +41,9 @@ public final class Calculator implements CalculatorAdditon, CalculatorSubstracti
         if ("plus".equals(operationIndicator)) {
             add();
         }
+
+        ///!!!!!!!!!!!!!!!!
+        return null;
     }
 
     @Override
