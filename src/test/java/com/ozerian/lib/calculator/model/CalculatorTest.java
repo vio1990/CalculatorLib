@@ -15,4 +15,13 @@ public class CalculatorTest {
     }
 
 
+    @Test
+    public void testAdd() throws Exception {
+
+    }
+
+    @Test
+    public void testSubstract() throws Exception {
+
+    }
 }
