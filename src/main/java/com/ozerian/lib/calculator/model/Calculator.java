@@ -32,7 +32,7 @@ public final class Calculator implements CalculatorAdditon, CalculatorSubstracti
                 double doubleValue = (double) number;
 
             } else {
-                // throw new Exception
+                // throw new Exception!!!!!!
             }
         }
         secondNumber = number;
@@ -42,7 +42,7 @@ public final class Calculator implements CalculatorAdditon, CalculatorSubstracti
             add();
         }
 
-        ///!!!!!!!!!!!!!!!!
+        ///!!!!!!!!!!!!!!!!!!!
         return null;
     }
 
