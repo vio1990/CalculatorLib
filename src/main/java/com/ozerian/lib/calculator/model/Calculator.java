@@ -2,7 +2,6 @@ package com.ozerian.lib.calculator.model;
 
 import com.ozerian.lib.calculator.interfaces.CalculatorAdditon;
 import com.ozerian.lib.calculator.interfaces.CalculatorSubstraction;
-import com.sun.xml.internal.ws.message.stream.StreamAttachment;
 
 public final class Calculator implements CalculatorAdditon, CalculatorSubstraction {
 

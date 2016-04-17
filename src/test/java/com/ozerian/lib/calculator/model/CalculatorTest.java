@@ -11,9 +11,8 @@ public class CalculatorTest {
         Calculator calculator = new Calculator();
         String actual = calculator.handleAndCalculate("5+3");
         String expected = "8";
-        assertEquals(actual, expected);
+        assertEquals(actual,expected);
     }
-
 
     @Test
     public void testAdd() throws Exception {
