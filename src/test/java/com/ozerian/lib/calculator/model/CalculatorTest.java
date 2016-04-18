@@ -10,7 +10,7 @@ public class CalculatorTest {
     public void testHandleAndCalculate() throws Exception {
         Calculator calculator = new Calculator();
         String actual = calculator.handleAndCalculate("5+3");
-        String expected = "8";
+        String expected = "5+3=8";
         assertEquals(actual,expected);
     }
 

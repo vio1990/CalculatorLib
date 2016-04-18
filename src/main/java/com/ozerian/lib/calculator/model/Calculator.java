@@ -12,6 +12,7 @@ public final class Calculator implements CalculatorAdditon, CalculatorSubstracti
         int secondNumber = 0;
 
         String operationIndicator = null;
+        String result = null;
 
         for (int i = 0; i < inputData.length(); i++) {
 
@@ -38,16 +39,18 @@ public final class Calculator implements CalculatorAdditon, CalculatorSubstracti
         number = 0;
 
         if ("plus".equals(operationIndicator)) {
-            add();
+            result = add(firstNumber, secondNumber);
         }
 
         ///!!!!!!!!!!!!!!!
-        return null;
+        return result;
     }
 
     @Override
-    public String add() {
-        return null;
+    public String add(int firstSummand, int secondSummand) {
+        int result = firstSummand + secondSummand;
+        String stringResult = firstSummand + "+" +  secondSummand + "=" + result;
+        return stringResult;
     }
 
     @Override
