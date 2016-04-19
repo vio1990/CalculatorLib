@@ -2,25 +2,29 @@ package com.ozerian.lib.calculator.model;
 
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
+import java.util.ArrayList;
+
+import static org.testng.Assert.assertEquals;
 
 public class CalculatorTest {
 
     @Test
-    public void testHandleAndCalculate() throws Exception {
-        Calculator calculator = new Calculator();
-        String actual = calculator.handleAndCalculate("5+3");
-        String expected = "5+3=8";
-        assertEquals(actual,expected);
+    public void testHandleAndCalculateInteger() throws Exception {
+        DataHandler handler = new DataHandler();
+        ArrayList actual = handler.inputDataHandling("375+271");
+        ArrayList expected = new ArrayList();
+        expected.add("375");
+        expected.add("271");
+        assertEquals(actual, expected);
     }
 
     @Test
-    public void testAdd() throws Exception {
-        String expected;
-    }
-
-    @Test
-    public void testSubstract() throws Exception {
-
+    public void testHandleAndCalculateDouble() throws Exception {
+        DataHandler handler = new DataHandler();
+        ArrayList actual = handler.inputDataHandling("375.4+271.5");
+        ArrayList expected = new ArrayList();
+        expected.add("375.4");
+        expected.add("271.5");
+        assertEquals(actual, expected);
     }
 }
