@@ -8,11 +8,11 @@ import java.util.ArrayList;
 public final class DataHandler {
 
     private String operationFlag;
+    private ArrayList<String> numbers = new ArrayList<>();
 
-    public ArrayList inputDataHandling(String inputData) throws WrongInputDataException, IncorrectInputDataException {
+    public void inputDataHandling(String inputData) throws WrongInputDataException, IncorrectInputDataException {
 
         StringBuilder tempNumber = new StringBuilder();
-        ArrayList<String> operatingNumbers = new ArrayList();
         boolean checkOperator = false;
 
         for (int i = 0; i < inputData.length(); i++) {
@@ -24,12 +24,12 @@ public final class DataHandler {
             } else if (inputUnit == '+' && checkOperator == false) {
                 operationFlag = "plus";
                 checkOperator = true;
-                operatingNumbers.add(tempNumber.toString());
+                numbers.add(tempNumber.toString());
                 tempNumber = new StringBuilder();
             } else if (inputUnit == '-' && checkOperator == false) {
                 operationFlag = "minus";
                 checkOperator = true;
-                operatingNumbers.add(tempNumber.toString());
+                numbers.add(tempNumber.toString());
                 tempNumber = new StringBuilder();
             } else if (inputUnit == '.' || inputUnit == ',') {
                 tempNumber.append(inputUnit);
@@ -39,11 +39,10 @@ public final class DataHandler {
 
         }
 
-        operatingNumbers.add(tempNumber.toString());
+        numbers.add(tempNumber.toString());
 
-        checkingDataCorrectness(operatingNumbers, checkOperator);
+        checkingDataCorrectness(numbers, checkOperator);
 
-        return operatingNumbers;
     }
 
     private void checkingDataCorrectness(ArrayList<String> operatingNumbers, boolean checkOperator) throws IncorrectInputDataException {
@@ -54,5 +53,9 @@ public final class DataHandler {
 
     public String getOperationFlag() {
         return operationFlag;
+    }
+
+    public ArrayList<String> getNumbers() {
+        return numbers;
     }
 }
