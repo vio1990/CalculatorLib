@@ -47,4 +47,28 @@ public class CalculatorTest {
         DataHandler handler = new DataHandler();
         ArrayList actual = handler.inputDataHandling("375.4");
     }
+
+    @Test(expectedExceptions = WrongInputDataException.class)
+    public void testExceptionWrongDataLetters() throws Exception {
+        DataHandler handler = new DataHandler();
+        ArrayList actual = handler.inputDataHandling("sdfasdf");
+    }
+
+    @Test(expectedExceptions = IncorrectInputDataException.class)
+    public void testExceptionWrongDataEmpty() throws Exception {
+        DataHandler handler = new DataHandler();
+        ArrayList actual = handler.inputDataHandling("");
+    }
+
+    @Test(expectedExceptions = WrongInputDataException.class)
+    public void testExceptionWrongDataOnlySpace() throws Exception {
+        DataHandler handler = new DataHandler();
+        ArrayList actual = handler.inputDataHandling(" ");
+    }
+
+    @Test(expectedExceptions = WrongInputDataException.class)
+    public void testExceptionWrongDataNumbersAndLetters() throws Exception {
+        DataHandler handler = new DataHandler();
+        ArrayList actual = handler.inputDataHandling(" sdf 4654 + 1df");
+    }
 }
