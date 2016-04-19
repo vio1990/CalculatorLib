@@ -45,6 +45,46 @@ public final class DataHandler {
 
     }
 
+    public String numbersTypeCheck(ArrayList<String> numbers) {
+        String firstNumber = numbers.get(0);
+        String secondNumber = numbers.get(1);
+        String numberTypes;
+
+        try {
+            int firstInt = Integer.parseInt(firstNumber);
+            int secondInt = Integer.parseInt(secondNumber);
+            numberTypes = "int";
+        } catch (NumberFormatException e) {
+            numberTypes = null;
+        }
+
+        try {
+            long firstLong = Long.parseLong(firstNumber);
+            long secondLong = Long.parseLong(secondNumber);
+            numberTypes = "long";
+        } catch (NumberFormatException e) {
+            numberTypes = null;
+        }
+
+        try {
+            float firstFloat = Float.parseFloat(firstNumber);
+            float secondFloat = Float.parseFloat(secondNumber);
+            numberTypes = "float";
+        } catch (NumberFormatException e) {
+            numberTypes = null;
+        }
+
+        try {
+            double firstDouble = Double.parseDouble(firstNumber);
+            double secondDouble = Double.parseDouble(secondNumber);
+            numberTypes = "double";
+        } catch (NumberFormatException e) {
+            numberTypes = null;
+        }
+
+        return numberTypes;
+    }
+
     private void checkingDataCorrectness(ArrayList<String> operatingNumbers, boolean checkOperator) throws IncorrectInputDataException {
         if (operatingNumbers.size() != 2 || operatingNumbers.contains("") || checkOperator == false) {
             throw new IncorrectInputDataException("You've entered incorrect data!");
