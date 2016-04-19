@@ -48,40 +48,56 @@ public final class DataHandler {
     public String numbersTypeCheck(ArrayList<String> numbers) {
         String firstNumber = numbers.get(0);
         String secondNumber = numbers.get(1);
-        String numberTypes;
+        String numberTypes = null;
+        boolean checkFlag = false;
 
-        try {
-            int firstInt = Integer.parseInt(firstNumber);
-            int secondInt = Integer.parseInt(secondNumber);
-            numberTypes = "int";
-        } catch (NumberFormatException e) {
-            numberTypes = null;
+        if (checkFlag == false) {
+            try {
+                int firstInt = Integer.parseInt(firstNumber);
+                int secondInt = Integer.parseInt(secondNumber);
+                numberTypes = "int";
+                checkFlag = true;
+            } catch (NumberFormatException e) {
+                numberTypes = null;
+            }
         }
 
-        try {
-            long firstLong = Long.parseLong(firstNumber);
-            long secondLong = Long.parseLong(secondNumber);
-            numberTypes = "long";
-        } catch (NumberFormatException e) {
-            numberTypes = null;
+        if (checkFlag == false) {
+            try {
+                long firstLong = Long.parseLong(firstNumber);
+                long secondLong = Long.parseLong(secondNumber);
+                numberTypes = "long";
+                checkFlag = true;
+            } catch (NumberFormatException e) {
+                numberTypes = null;
+            }
         }
 
-        try {
-            float firstFloat = Float.parseFloat(firstNumber);
-            float secondFloat = Float.parseFloat(secondNumber);
-            numberTypes = "float";
-        } catch (NumberFormatException e) {
-            numberTypes = null;
+        if (checkFlag == false) {
+            try {
+                float firstFloat = Float.parseFloat(firstNumber);
+                float secondFloat = Float.parseFloat(secondNumber);
+                numberTypes = "float";
+                checkFlag = true;
+            } catch (NumberFormatException e) {
+                numberTypes = null;
+            }
         }
 
-        try {
-            double firstDouble = Double.parseDouble(firstNumber);
-            double secondDouble = Double.parseDouble(secondNumber);
-            numberTypes = "double";
-        } catch (NumberFormatException e) {
-            numberTypes = null;
+        if (checkFlag == false) {
+            try {
+                double firstDouble = Double.parseDouble(firstNumber);
+                double secondDouble = Double.parseDouble(secondNumber);
+                numberTypes = "double";
+                checkFlag = true;
+            } catch (NumberFormatException e) {
+                numberTypes = null;
+            }
         }
 
+        if (numberTypes == null) {
+            throw new NumberFormatException();
+        }
         return numberTypes;
     }
 
