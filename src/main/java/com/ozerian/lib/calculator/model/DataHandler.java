@@ -31,7 +31,7 @@ public final class DataHandler {
                 checkOperator = true;
                 numbers.add(tempNumber.toString());
                 tempNumber = new StringBuilder();
-            } else if (inputUnit == '.' || inputUnit == ',') {
+            } else if (inputUnit == '.') {
                 tempNumber.append(inputUnit);
             } else {
                 throw new WrongInputDataException("Wrong input data!");
@@ -53,8 +53,8 @@ public final class DataHandler {
 
         if (checkFlag == false) {
             try {
-                int firstInt = Integer.parseInt(firstNumber);
-                int secondInt = Integer.parseInt(secondNumber);
+                int firstInt = Integer.valueOf(firstNumber);
+                int secondInt = Integer.valueOf(secondNumber);
                 numberTypes = "int";
                 checkFlag = true;
             } catch (NumberFormatException e) {
@@ -64,8 +64,8 @@ public final class DataHandler {
 
         if (checkFlag == false) {
             try {
-                long firstLong = Long.parseLong(firstNumber);
-                long secondLong = Long.parseLong(secondNumber);
+                long firstLong = Long.valueOf(firstNumber);
+                long secondLong = Long.valueOf(secondNumber);
                 numberTypes = "long";
                 checkFlag = true;
             } catch (NumberFormatException e) {
@@ -75,9 +75,9 @@ public final class DataHandler {
 
         if (checkFlag == false) {
             try {
-                float firstFloat = Float.parseFloat(firstNumber);
-                float secondFloat = Float.parseFloat(secondNumber);
-                numberTypes = "float";
+                double firstDouble = Double.valueOf(firstNumber);
+                double secondDouble = Double.valueOf(secondNumber);
+                numberTypes = "double";
                 checkFlag = true;
             } catch (NumberFormatException e) {
                 numberTypes = null;
@@ -86,9 +86,9 @@ public final class DataHandler {
 
         if (checkFlag == false) {
             try {
-                double firstDouble = Double.parseDouble(firstNumber);
-                double secondDouble = Double.parseDouble(secondNumber);
-                numberTypes = "double";
+                float firstFloat = Float.valueOf(firstNumber);
+                float secondFloat = Float.valueOf(secondNumber);
+                numberTypes = "float";
                 checkFlag = true;
             } catch (NumberFormatException e) {
                 numberTypes = null;
