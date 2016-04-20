@@ -8,6 +8,9 @@ import java.util.ArrayList;
 public final class DataHandler {
 
     private String operationFlag;
+
+    private String numberType;
+
     private ArrayList<String> numbers = new ArrayList<>();
 
     public void inputDataHandling(String inputData) throws WrongInputDataException, IncorrectInputDataException {
@@ -45,10 +48,11 @@ public final class DataHandler {
 
     }
 
-    public String numbersTypeCheck(ArrayList<String> numbers) {
+    public void numbersTypeCheck(ArrayList<String> numbers) {
+
         String firstNumber = numbers.get(0);
         String secondNumber = numbers.get(1);
-        String numberTypes = null;
+        String numberTypes = new String();
         boolean checkFlag = false;
 
         if (checkFlag == false) {
@@ -98,7 +102,7 @@ public final class DataHandler {
         if (numberTypes == null) {
             throw new NumberFormatException();
         }
-        return numberTypes;
+        numberType = numberTypes;
     }
 
     private void checkingDataCorrectness(ArrayList<String> operatingNumbers, boolean checkOperator) throws IncorrectInputDataException {
@@ -113,5 +117,9 @@ public final class DataHandler {
 
     public ArrayList<String> getNumbers() {
         return numbers;
+    }
+
+    public String getNumberType() {
+        return numberType;
     }
 }

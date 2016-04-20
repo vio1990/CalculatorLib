@@ -8,7 +8,30 @@ import java.util.ArrayList;
 
 import static org.testng.Assert.assertEquals;
 
-public class CalculatorTest {
+public class DataHandlerTest {
+    @Test
+    public void testNumbersTypeCheckInt() throws Exception {
+        DataHandler handler = new DataHandler();
+        ArrayList<String> numbers = new ArrayList<>();
+        numbers.add("2");
+        numbers.add("3");
+        handler.numbersTypeCheck(numbers);
+        String actual = handler.getNumberType();
+        String expected = "int";
+        assertEquals(actual, expected);
+    }
+
+    @Test
+    public void testNumbersTypeCheckFloat() throws Exception {
+        DataHandler handler = new DataHandler();
+        ArrayList<String> numbers = new ArrayList<>();
+        numbers.add("2.1");
+        numbers.add("3");
+        handler.numbersTypeCheck(numbers);
+        String actual = handler.getNumberType();
+        String expected = "float";
+        assertEquals(actual, expected);
+    }
 
     @Test
     public void testHandlingInputDataInteger() throws Exception {
