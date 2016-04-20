@@ -75,9 +75,9 @@ public final class DataHandler {
 
         if (checkFlag == false) {
             try {
-                double firstDouble = Double.valueOf(firstNumber);
-                double secondDouble = Double.valueOf(secondNumber);
-                numberTypes = "double";
+                float firstFloat = Float.valueOf(firstNumber);
+                float secondFloat = Float.valueOf(secondNumber);
+                numberTypes = "float";
                 checkFlag = true;
             } catch (NumberFormatException e) {
                 numberTypes = null;
@@ -86,9 +86,9 @@ public final class DataHandler {
 
         if (checkFlag == false) {
             try {
-                float firstFloat = Float.valueOf(firstNumber);
-                float secondFloat = Float.valueOf(secondNumber);
-                numberTypes = "float";
+                double firstDouble = Double.valueOf(firstNumber);
+                double secondDouble = Double.valueOf(secondNumber);
+                numberTypes = "double";
                 checkFlag = true;
             } catch (NumberFormatException e) {
                 numberTypes = null;
