@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * String numberType (shows the type of input data).
  * ArrayList numbers with the participants of the math operation.
  */
-public final class DataHandler {
+public final class DataParser {
 
     private String operationFlag;
 

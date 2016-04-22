@@ -8,10 +8,10 @@ import java.util.ArrayList;
 
 import static org.testng.Assert.assertEquals;
 
-public class DataHandlerTest {
+public class DataParserTest {
     @Test
     public void testNumbersTypeCheckInt() throws Exception {
-        DataHandler handler = new DataHandler();
+        DataParser handler = new DataParser();
         ArrayList<String> numbers = new ArrayList<>();
         numbers.add("2");
         numbers.add("3");
@@ -23,7 +23,7 @@ public class DataHandlerTest {
 
     @Test
     public void testNumbersTypeCheckFloat() throws Exception {
-        DataHandler handler = new DataHandler();
+        DataParser handler = new DataParser();
         ArrayList<String> numbers = new ArrayList<>();
         numbers.add("2.1");
         numbers.add("3");
@@ -35,7 +35,7 @@ public class DataHandlerTest {
 
     @Test
     public void testHandlingInputDataInteger() throws Exception {
-        DataHandler handler = new DataHandler();
+        DataParser handler = new DataParser();
         handler.inputDataHandling("375+271");
         ArrayList actual = handler.getNumbers();
         ArrayList expected = new ArrayList();
@@ -46,7 +46,7 @@ public class DataHandlerTest {
 
     @Test
     public void testHandlingInputDataDouble() throws Exception {
-        DataHandler handler = new DataHandler();
+        DataParser handler = new DataParser();
         handler.inputDataHandling("375.4+271.5");
         ArrayList actual = handler.getNumbers();
         ArrayList expected = new ArrayList();
@@ -57,43 +57,43 @@ public class DataHandlerTest {
 
     @Test(expectedExceptions = WrongInputDataException.class)
     public void testExceptionOneMoreOperator() throws Exception {
-        DataHandler handler = new DataHandler();
+        DataParser handler = new DataParser();
         handler.inputDataHandling("375.4+271.5+");
     }
 
     @Test(expectedExceptions = IncorrectInputDataException.class)
     public void testExceptionNotEnoughNumbers() throws Exception {
-        DataHandler handler = new DataHandler();
+        DataParser handler = new DataParser();
         handler.inputDataHandling("375.4+");
     }
 
     @Test(expectedExceptions = IncorrectInputDataException.class)
     public void testExceptionNotEnoughNumbersAndOperators() throws Exception {
-        DataHandler handler = new DataHandler();
+        DataParser handler = new DataParser();
         handler.inputDataHandling("375.4");
     }
 
     @Test(expectedExceptions = WrongInputDataException.class)
     public void testExceptionWrongDataLetters() throws Exception {
-        DataHandler handler = new DataHandler();
+        DataParser handler = new DataParser();
         handler.inputDataHandling("sdfasdf");
     }
 
     @Test(expectedExceptions = IncorrectInputDataException.class)
     public void testExceptionWrongDataEmpty() throws Exception {
-        DataHandler handler = new DataHandler();
+        DataParser handler = new DataParser();
         handler.inputDataHandling("");
     }
 
     @Test(expectedExceptions = WrongInputDataException.class)
     public void testExceptionWrongDataOnlySpace() throws Exception {
-        DataHandler handler = new DataHandler();
+        DataParser handler = new DataParser();
         handler.inputDataHandling(" ");
     }
 
     @Test(expectedExceptions = WrongInputDataException.class)
     public void testExceptionWrongDataNumbersAndLetters() throws Exception {
-        DataHandler handler = new DataHandler();
+        DataParser handler = new DataParser();
         handler.inputDataHandling(" sdf 4654 + 1df");
     }
 }
