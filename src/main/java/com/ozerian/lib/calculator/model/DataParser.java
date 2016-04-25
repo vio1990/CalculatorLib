@@ -3,6 +3,7 @@ package com.ozerian.lib.calculator.model;
 import com.ozerian.lib.calculator.exceptions.IncorrectInputDataException;
 import com.ozerian.lib.calculator.exceptions.WrongInputDataException;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 /**
@@ -165,4 +166,5 @@ public final class DataParser {
     public String getNumberType() {
         return numberType;
     }
+
 }
