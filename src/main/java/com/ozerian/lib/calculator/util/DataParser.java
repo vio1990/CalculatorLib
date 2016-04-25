@@ -1,24 +1,30 @@
-package com.ozerian.lib.calculator.model;
+package com.ozerian.lib.calculator.util;
 
 import com.ozerian.lib.calculator.exceptions.IncorrectInputDataException;
 import com.ozerian.lib.calculator.exceptions.WrongInputDataException;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 
 /**
  * Class for handling input math expression.
  * With String operationFlag (parses and shows the operator of math operation).
  * String numberType (shows the type of input data).
- * ArrayList numbers with the participants of the math operation.
+ * ArrayList stringNumbers with the participants of the math operation.
  */
 public final class DataParser {
+
+    public DataParser(OperationFactory operationFactory) {
+        this.operationFactory = operationFactory;
+    }
+
+    private OperationFactory operationFactory;
 
     private String operationFlag;
 
     private String numberType;
 
-    private ArrayList<String> numbers = new ArrayList<>();
+    private ArrayList<String> stringNumbers = new ArrayList<>();
+
 
     /**
      * Definition of the operator's type and filling the List with participants of
@@ -40,27 +46,21 @@ public final class DataParser {
 
             if (inputUnit - '0' >= 0 && inputUnit - '9' <= 0) {
                 tempNumber.append(inputUnit);
-            } else if (inputUnit == '+' && checkOperator == false) {
-                operationFlag = "plus";
+            } else if (operationFactory.getOperations().containsKey(String.valueOf(inputUnit)) && checkOperator == false) {
+                operationFlag = String.valueOf(inputUnit);
                 checkOperator = true;
-                numbers.add(tempNumber.toString());
-                tempNumber = new StringBuilder();
-            } else if (inputUnit == '-' && checkOperator == false) {
-                operationFlag = "minus";
-                checkOperator = true;
-                numbers.add(tempNumber.toString());
+                stringNumbers.add(tempNumber.toString());
                 tempNumber = new StringBuilder();
             } else if (inputUnit == '.') {
                 tempNumber.append(inputUnit);
             } else {
                 throw new WrongInputDataException("Wrong input data!");
             }
-
         }
 
-        numbers.add(tempNumber.toString());
+        stringNumbers.add(tempNumber.toString());
 
-        checkingDataCorrectness(numbers, checkOperator);
+        checkingDataCorrectness(stringNumbers, checkOperator);
 
     }
 
@@ -154,8 +154,8 @@ public final class DataParser {
      *
      * @return ArrayList with values of the participants of the math operation..
      */
-    public ArrayList<String> getNumbers() {
-        return numbers;
+    public ArrayList<String> getStringNumbers() {
+        return stringNumbers;
     }
 
     /**
