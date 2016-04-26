@@ -58,7 +58,7 @@ public final class NumberSubtraction implements Subtraction {
     /**
      * Subtraction operation for int data type.
      *
-     * @param firstNumber  int minuednd
+     * @param firstNumber  int minuend.
      * @param secondNumber int subtrahend.
      */
     public void subtractInt(int firstNumber, int secondNumber) {
@@ -70,7 +70,7 @@ public final class NumberSubtraction implements Subtraction {
     /**
      * Subtraction operation for long data type.
      *
-     * @param firstNumber  long minuednd
+     * @param firstNumber  long minuend.
      * @param secondNumber long subtrahend.
      */
     public void subtractLong(long firstNumber, long secondNumber) {
@@ -82,7 +82,7 @@ public final class NumberSubtraction implements Subtraction {
     /**
      * Subtraction operation for float data type.
      *
-     * @param firstNumber  float minuednd
+     * @param firstNumber  float minuend.
      * @param secondNumber float subtrahend.
      */
     public void subtractFloat(float firstNumber, float secondNumber) {
@@ -94,7 +94,7 @@ public final class NumberSubtraction implements Subtraction {
     /**
      * Subtraction operation for double data type.
      *
-     * @param firstNumber  double minuednd
+     * @param firstNumber  double minuend.
      * @param secondNumber double subtrahend.
      */
     public void subtractDouble(double firstNumber, double secondNumber) {

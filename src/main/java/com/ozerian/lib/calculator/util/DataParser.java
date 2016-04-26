@@ -54,7 +54,7 @@ public final class DataParser {
             } else if (inputUnit == '.') {
                 tempNumber.append(inputUnit);
             } else {
-                throw new WrongInputDataException("Wrong input data!");
+                throw new WrongInputDataException("Wrong input data or this math operation is not supported!");
             }
         }
 
@@ -135,7 +135,7 @@ public final class DataParser {
      * @throws IncorrectInputDataException throws when there are any problems with the data.
      */
     private void checkingDataCorrectness(ArrayList<String> operatingNumbers, boolean checkOperator) throws IncorrectInputDataException {
-        if (operatingNumbers.size() != 2 || operatingNumbers.contains("") || checkOperator == false) {
+        if (operatingNumbers.size() != 2 || operatingNumbers.contains("")) {
             throw new IncorrectInputDataException("You've entered incorrect data!");
         }
     }
