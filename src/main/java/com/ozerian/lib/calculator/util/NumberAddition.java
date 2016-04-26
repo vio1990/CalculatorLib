@@ -58,7 +58,7 @@ public final class NumberAddition implements Addition {
     /**
      * Addition operation for int data type.
      *
-     * @param firstNumber  int first summand
+     * @param firstNumber  int first summand.
      * @param secondNumber int second summand.
      */
     public void addInt(int firstNumber, int secondNumber) {
@@ -71,7 +71,7 @@ public final class NumberAddition implements Addition {
     /**
      * Addition operation for long data type.
      *
-     * @param firstNumber  long first summand
+     * @param firstNumber  long first summand.
      * @param secondNumber long second summand.
      */
     public void addLong(long firstNumber, long secondNumber) {
@@ -84,7 +84,7 @@ public final class NumberAddition implements Addition {
     /**
      * Addition operation for float data type.
      *
-     * @param firstNumber  float first summand
+     * @param firstNumber  float first summand.
      * @param secondNumber float second summand.
      */
     public void addFloat(float firstNumber, float secondNumber) {
@@ -98,7 +98,7 @@ public final class NumberAddition implements Addition {
     /**
      * Addition operation for double data type.
      *
-     * @param firstNumber  double first summand
+     * @param firstNumber  double first summand.
      * @param secondNumber double second summand.
      */
     public void addDouble(double firstNumber, double secondNumber) {
