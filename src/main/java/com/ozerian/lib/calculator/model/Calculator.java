@@ -20,7 +20,9 @@ import com.ozerian.lib.calculator.util.OperationFactory;
 public final class Calculator {
 
     private OperationFactory supportedOperation = new OperationFactory();
+
     private DataParser parser = new DataParser(supportedOperation);
+
     private NumberAddition numberAddition = new NumberAddition(parser, supportedOperation);
     private NumberSubtraction numberSubtraction = new NumberSubtraction(parser, supportedOperation);
 
@@ -70,4 +72,13 @@ public final class Calculator {
         return supportedOperation;
     }
 
+    /**
+     * Method returns DataParser for possibility to add supported operations
+     * and checking input data.
+     *
+     * @return DataParser object.
+     */
+    public DataParser getParser() {
+        return parser;
+    }
 }
