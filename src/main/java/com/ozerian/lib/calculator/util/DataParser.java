@@ -17,6 +17,9 @@ public final class DataParser {
         this.operationFactory = operationFactory;
     }
 
+    public static final int INDEX_OF_FIRST_NUMBER = 0;
+    public static final int INDEX_OF_SECOND_NUMBER = 1;
+
     private OperationFactory operationFactory;
 
     private String operationFlag;
@@ -38,6 +41,7 @@ public final class DataParser {
     public void inputDataHandling(String inputData) throws WrongInputDataException, IncorrectInputDataException {
 
         StringBuilder tempNumber = new StringBuilder();
+
         boolean checkOperator = false;
 
         for (int i = 0; i < inputData.length(); i++) {
@@ -49,7 +53,7 @@ public final class DataParser {
             } else if (operationFactory.getOperations().containsKey(String.valueOf(inputUnit)) && checkOperator == false) {
                 operationFlag = String.valueOf(inputUnit);
                 checkOperator = true;
-                stringNumbers.add(tempNumber.toString());
+                stringNumbers.add(INDEX_OF_FIRST_NUMBER, tempNumber.toString());
                 tempNumber = new StringBuilder();
             } else if (inputUnit == '.') {
                 tempNumber.append(inputUnit);
@@ -72,8 +76,8 @@ public final class DataParser {
      */
     public void numbersTypeCheck(ArrayList<String> numbers) {
 
-        String firstNumber = numbers.get(0);
-        String secondNumber = numbers.get(1);
+        String firstNumber = numbers.get(INDEX_OF_FIRST_NUMBER);
+        String secondNumber = numbers.get(INDEX_OF_SECOND_NUMBER);
         String numberTypes = new String();
         boolean checkFlag = false;
 
@@ -135,7 +139,7 @@ public final class DataParser {
      * @throws IncorrectInputDataException throws when there are any problems with the data.
      */
     private void checkingDataCorrectness(ArrayList<String> operatingNumbers, boolean checkOperator) throws IncorrectInputDataException {
-        if (operatingNumbers.size() != 2 || operatingNumbers.contains("")) {
+        if (operatingNumbers.size() != 2 || operatingNumbers.contains("") || checkOperator == false) {
             throw new IncorrectInputDataException("You've entered incorrect data!");
         }
     }

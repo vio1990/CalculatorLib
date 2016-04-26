@@ -41,6 +41,7 @@ public final class Calculator {
         parser.inputDataHandling(inputExpression);
         parser.numbersTypeCheck(parser.getStringNumbers());
         operatorCheckAndOperate(parser, totalResult);
+        parser.getStringNumbers().clear();
         return totalResult.toString();
     }
 

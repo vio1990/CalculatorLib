@@ -64,6 +64,7 @@ public final class NumberAddition implements Addition {
     public void addInt(int firstNumber, int secondNumber) {
         int result = firstNumber + secondNumber;
         String textResult = firstNumber + "+" + secondNumber + "=" + result;
+        operationResult = new StringBuilder();
         operationResult.append(textResult);
     }
 
@@ -76,6 +77,7 @@ public final class NumberAddition implements Addition {
     public void addLong(long firstNumber, long secondNumber) {
         long result = firstNumber + secondNumber;
         String textResult = firstNumber + "+" + secondNumber + "=" + result;
+        operationResult = new StringBuilder();
         operationResult.append(textResult);
     }
 
@@ -88,6 +90,7 @@ public final class NumberAddition implements Addition {
     public void addFloat(float firstNumber, float secondNumber) {
         float result = firstNumber + secondNumber;
         String textResult = firstNumber + "+" + secondNumber + "=" + result;
+        operationResult = new StringBuilder();
         operationResult.append(textResult);
 
     }
@@ -101,6 +104,7 @@ public final class NumberAddition implements Addition {
     public void addDouble(double firstNumber, double secondNumber) {
         double result = firstNumber + secondNumber;
         String textResult = firstNumber + "+" + secondNumber + "=" + result;
+        operationResult = new StringBuilder();
         operationResult.append(textResult);
 
     }

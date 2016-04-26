@@ -64,6 +64,7 @@ public final class NumberSubtraction implements Subtraction {
     public void subtractInt(int firstNumber, int secondNumber) {
         int result = firstNumber - secondNumber;
         String textResult = firstNumber + "-" + secondNumber + "=" + result;
+        operationResult = new StringBuilder();
         operationResult.append(textResult);
     }
 
@@ -76,6 +77,7 @@ public final class NumberSubtraction implements Subtraction {
     public void subtractLong(long firstNumber, long secondNumber) {
         long result = firstNumber - secondNumber;
         String textResult = firstNumber + "-" + secondNumber + "=" + result;
+        operationResult = new StringBuilder();
         operationResult.append(textResult);
     }
 
@@ -88,6 +90,7 @@ public final class NumberSubtraction implements Subtraction {
     public void subtractFloat(float firstNumber, float secondNumber) {
         float result = firstNumber - secondNumber;
         String textResult = firstNumber + "-" + secondNumber + "=" + result;
+        operationResult = new StringBuilder();
         operationResult.append(textResult);
     }
 
@@ -100,6 +103,7 @@ public final class NumberSubtraction implements Subtraction {
     public void subtractDouble(double firstNumber, double secondNumber) {
         double result = firstNumber - secondNumber;
         String textResult = firstNumber + "-" + secondNumber + "=" + result;
+        operationResult = new StringBuilder();
         operationResult.append(textResult);
     }
 
