@@ -13,14 +13,14 @@ import java.util.ArrayList;
  */
 public final class DataParser {
 
-    public DataParser(OperationFactory operationFactory) {
-        this.operationFactory = operationFactory;
+    public DataParser(OperationRegister operationRegister) {
+        this.operationRegister = operationRegister;
     }
 
     public static final int INDEX_OF_FIRST_NUMBER = 0;
     public static final int INDEX_OF_SECOND_NUMBER = 1;
 
-    private OperationFactory operationFactory;
+    private OperationRegister operationRegister;
 
     private String operationFlag;
 
@@ -50,7 +50,7 @@ public final class DataParser {
 
             if (inputUnit - '0' >= 0 && inputUnit - '9' <= 0) {
                 tempNumber.append(inputUnit);
-            } else if (operationFactory.getOperations().containsKey(String.valueOf(inputUnit)) && checkOperator == false) {
+            } else if (operationRegister.getOperations().containsKey(String.valueOf(inputUnit)) && checkOperator == false) {
                 operationFlag = String.valueOf(inputUnit);
                 checkOperator = true;
                 stringNumbers.add(INDEX_OF_FIRST_NUMBER, tempNumber.toString());

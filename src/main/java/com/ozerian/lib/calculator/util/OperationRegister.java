@@ -8,16 +8,22 @@ import java.util.Map;
 /**
  * This class is created for possibility to add new math operations.
  */
-public final class OperationFactory {
+public final class OperationRegister {
 
-    private Map<String, CalculatorOperation> operations = new HashMap<>();
+    /**
+     * Private constructor for impossibility to create new class object.
+     */
+    private OperationRegister() {
+    }
+
+    private static Map<String, CalculatorOperation> operations = new HashMap<>();
 
     /**
      * Addition a new math operation.
      * @param operator String operator. For example, "+", "-", "/", "*" etc.
      * @param mathOperation CalculatorOperation object with the logic of adding math operation.
      */
-    public void addOperation(String operator, CalculatorOperation mathOperation) {
+    public static void addOperation(String operator, CalculatorOperation mathOperation) {
         operations.put(operator, mathOperation);
     }
 
@@ -25,7 +31,7 @@ public final class OperationFactory {
      * This method returns the HashMap with supported operations.
      * @return Map with supported operations.
      */
-    public Map<String, CalculatorOperation> getOperations() {
+    public static Map<String, CalculatorOperation> getOperations() {
         return operations;
     }
 }

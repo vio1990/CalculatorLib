@@ -4,7 +4,7 @@ import com.ozerian.lib.calculator.exceptions.IncorrectInputDataException;
 import com.ozerian.lib.calculator.exceptions.WrongInputDataException;
 import com.ozerian.lib.calculator.util.DataParser;
 import com.ozerian.lib.calculator.util.NumberAddition;
-import com.ozerian.lib.calculator.util.OperationFactory;
+import com.ozerian.lib.calculator.util.OperationRegister;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -13,8 +13,8 @@ import static org.testng.Assert.assertEquals;
 
 public class DataParserTest {
 
-    public OperationFactory operationFactory = new OperationFactory();
-    DataParser handler = new DataParser(operationFactory);
+    public OperationRegister operationRegister = new OperationRegister();
+    DataParser handler = new DataParser(operationRegister);
 
 
     @Test
@@ -42,8 +42,8 @@ public class DataParserTest {
 
     @Test
     public void testHandlingInputDataInteger() throws Exception {
-        DataParser parser = new DataParser(operationFactory);
-        new NumberAddition(parser, operationFactory);
+        DataParser parser = new DataParser(operationRegister);
+        new NumberAddition(parser, operationRegister);
         parser.inputDataHandling("375+271");
         ArrayList actual = parser.getStringNumbers();
         ArrayList expected = new ArrayList();
@@ -54,8 +54,8 @@ public class DataParserTest {
 
     @Test
     public void testHandlingInputDataDouble() throws Exception {
-        DataParser parser = new DataParser(operationFactory);
-        new NumberAddition(parser, operationFactory);
+        DataParser parser = new DataParser(operationRegister);
+        new NumberAddition(parser, operationRegister);
         parser.inputDataHandling("375.4+271.5");
         ArrayList actual = parser.getStringNumbers();
         ArrayList expected = new ArrayList();

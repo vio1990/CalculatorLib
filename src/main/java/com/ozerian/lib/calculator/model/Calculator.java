@@ -7,7 +7,7 @@ import com.ozerian.lib.calculator.interfaces.CalculatorOperation;
 import com.ozerian.lib.calculator.util.DataParser;
 import com.ozerian.lib.calculator.util.NumberAddition;
 import com.ozerian.lib.calculator.util.NumberSubtraction;
-import com.ozerian.lib.calculator.util.OperationFactory;
+import com.ozerian.lib.calculator.util.OperationRegister;
 
 /**
  * Util Class for calculation different math operations with different types of data.
@@ -19,7 +19,7 @@ import com.ozerian.lib.calculator.util.OperationFactory;
  */
 public final class Calculator {
 
-    private OperationFactory supportedOperation = new OperationFactory();
+    private OperationRegister supportedOperation = new OperationRegister();
 
     private DataParser parser = new DataParser(supportedOperation);
 
@@ -65,11 +65,11 @@ public final class Calculator {
     }
 
     /**
-     * Method returns OperationFactory for possibility to check supported operations.
+     * Method returns OperationRegister for possibility to check supported operations.
      *
-     * @return OperationFactory object.
+     * @return OperationRegister object.
      */
-    public OperationFactory getSupportedOperation() {
+    public OperationRegister getSupportedOperation() {
         return supportedOperation;
     }
 

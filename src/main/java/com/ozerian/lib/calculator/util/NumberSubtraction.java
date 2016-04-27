@@ -11,19 +11,19 @@ public final class NumberSubtraction implements Subtraction {
     public static final int INDEX_OF_FIRST_NUMBER = 0;
     public static final int INDEX_OF_SECOND_NUMBER = 1;
     private DataParser parser;
-    private OperationFactory operationFactory;
+    private OperationRegister operationRegister;
     private StringBuilder operationResult = new StringBuilder();
 
     /**
-     * Creation new object with parser and operationFactory.
+     * Creation new object with parser and operationRegister.
      *
      * @param parser           DataParser for checking data type.
-     * @param operationFactory OperationFactory for checking supported operations.
+     * @param operationRegister OperationRegister for checking supported operations.
      */
-    public NumberSubtraction(DataParser parser, OperationFactory operationFactory) {
+    public NumberSubtraction(DataParser parser, OperationRegister operationRegister) {
         this.parser = parser;
-        this.operationFactory = operationFactory;
-        operationFactory.addOperation("-", this);
+        this.operationRegister = operationRegister;
+        operationRegister.addOperation("-", this);
     }
 
     /**
