@@ -13,8 +13,7 @@ import static org.testng.Assert.assertEquals;
 
 public class DataParserTest {
 
-    public OperationRegister operationRegister = new OperationRegister();
-    DataParser handler = new DataParser(operationRegister);
+    DataParser handler = new DataParser();
 
 
     @Test
@@ -42,8 +41,8 @@ public class DataParserTest {
 
     @Test
     public void testHandlingInputDataInteger() throws Exception {
-        DataParser parser = new DataParser(operationRegister);
-        new NumberAddition(parser, operationRegister);
+        DataParser parser = new DataParser();
+        new NumberAddition(parser);
         parser.inputDataHandling("375+271");
         ArrayList actual = parser.getStringNumbers();
         ArrayList expected = new ArrayList();
@@ -54,8 +53,8 @@ public class DataParserTest {
 
     @Test
     public void testHandlingInputDataDouble() throws Exception {
-        DataParser parser = new DataParser(operationRegister);
-        new NumberAddition(parser, operationRegister);
+        DataParser parser = new DataParser();
+        new NumberAddition(parser);
         parser.inputDataHandling("375.4+271.5");
         ArrayList actual = parser.getStringNumbers();
         ArrayList expected = new ArrayList();

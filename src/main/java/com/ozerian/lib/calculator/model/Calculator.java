@@ -1,8 +1,5 @@
 package com.ozerian.lib.calculator.model;
 
-import com.ozerian.lib.calculator.exceptions.IncorrectInputDataException;
-import com.ozerian.lib.calculator.exceptions.NotSupportedException;
-import com.ozerian.lib.calculator.exceptions.WrongInputDataException;
 import com.ozerian.lib.calculator.interfaces.CalculatorOperation;
 import com.ozerian.lib.calculator.util.DataParser;
 import com.ozerian.lib.calculator.util.NumberAddition;
@@ -19,24 +16,20 @@ import com.ozerian.lib.calculator.util.OperationRegister;
  */
 public final class Calculator {
 
-    private OperationRegister supportedOperation = new OperationRegister();
+    private DataParser parser = new DataParser();
 
-    private DataParser parser = new DataParser(supportedOperation);
-
-    private NumberAddition numberAddition = new NumberAddition(parser, supportedOperation);
-    private NumberSubtraction numberSubtraction = new NumberSubtraction(parser, supportedOperation);
+    private NumberAddition numberAddition = new NumberAddition(parser);
+    private NumberSubtraction numberSubtraction = new NumberSubtraction(parser);
 
     /**
      * This method handles an input data, calculates and returns the result.
      *
      * @param inputExpression String with math expression.
      * @return String with total result of the operation.
-     * @throws WrongInputDataException     Throws when there are problems with input data initially.
-     * @throws IncorrectInputDataException Throws when there are problems with input data after some methods
-     *                                     and operations.
-     * @throws NotSupportedException       Throws when there are attempt to use not supported operation.
+
+
      */
-    public String calculatorExecute(String inputExpression) throws WrongInputDataException, IncorrectInputDataException, NotSupportedException {
+    public String calculatorExecute(String inputExpression) {
         StringBuilder totalResult = new StringBuilder();
         parser.inputDataHandling(inputExpression);
         parser.numbersTypeCheck(parser.getStringNumbers());
@@ -50,27 +43,22 @@ public final class Calculator {
      *
      * @param parser DataParser for handling the input data.
      * @param result StringBuilder for formation of the total result after calculation.
-     * @throws NotSupportedException       Throws when there are attempt to use not supported operation.
-     * @throws IncorrectInputDataException Throws when there are problems with input data after some methods
-     *                                     and operations.
-     */
-    public void operatorCheckAndOperate(DataParser parser, StringBuilder result) throws NotSupportedException, IncorrectInputDataException {
-        if (supportedOperation.getOperations().containsKey(parser.getOperationFlag())) {
-            CalculatorOperation mathOperation = this.supportedOperation.getOperations().get(parser.getOperationFlag());
-            mathOperation.calculate();
-            result.append(mathOperation.getOperationResult());
-        } else {
-            throw new NotSupportedException("This math operation is not supported!");
-        }
-    }
 
-    /**
-     * Method returns OperationRegister for possibility to check supported operations.
-     *
-     * @return OperationRegister object.
      */
-    public OperationRegister getSupportedOperation() {
-        return supportedOperation;
+    public void operatorCheckAndOperate(DataParser parser, StringBuilder result) {
+        if (OperationRegister.getOperations().containsKey(parser.getOperationFlag())) {
+            CalculatorOperation mathOperation = OperationRegister.getOperations().get(parser.getOperationFlag());
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+            /*mathOperation.calculate();*/
+
+
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            result.append(mathOperation.getOperationResult());
+        /*} else {
+            throw new NotSupportedException("This math operation is not supported!");*/
+        }
     }
 
     /**

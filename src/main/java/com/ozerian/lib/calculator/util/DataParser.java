@@ -1,7 +1,5 @@
 package com.ozerian.lib.calculator.util;
 
-import com.ozerian.lib.calculator.exceptions.IncorrectInputDataException;
-import com.ozerian.lib.calculator.exceptions.WrongInputDataException;
 
 import java.util.ArrayList;
 
@@ -13,14 +11,8 @@ import java.util.ArrayList;
  */
 public final class DataParser {
 
-    public DataParser(OperationRegister operationRegister) {
-        this.operationRegister = operationRegister;
-    }
-
     public static final int INDEX_OF_FIRST_NUMBER = 0;
     public static final int INDEX_OF_SECOND_NUMBER = 1;
-
-    private OperationRegister operationRegister;
 
     private String operationFlag;
 
@@ -34,11 +26,8 @@ public final class DataParser {
      * the math. operation.
      *
      * @param inputData String with input math expression.
-     * @throws WrongInputDataException     Throws when there are problems with input data initially.
-     * @throws IncorrectInputDataException Throws when there are problems with input data after some methods
-     *                                     and operations.
      */
-    public void inputDataHandling(String inputData) throws WrongInputDataException, IncorrectInputDataException {
+    public void inputDataHandling(String inputData) {
 
         StringBuilder tempNumber = new StringBuilder();
 
@@ -50,16 +39,16 @@ public final class DataParser {
 
             if (inputUnit - '0' >= 0 && inputUnit - '9' <= 0) {
                 tempNumber.append(inputUnit);
-            } else if (operationRegister.getOperations().containsKey(String.valueOf(inputUnit)) && checkOperator == false) {
+            } else if (OperationRegister.getOperations().containsKey(String.valueOf(inputUnit)) && checkOperator == false) {
                 operationFlag = String.valueOf(inputUnit);
                 checkOperator = true;
                 stringNumbers.add(INDEX_OF_FIRST_NUMBER, tempNumber.toString());
                 tempNumber = new StringBuilder();
             } else if (inputUnit == '.') {
                 tempNumber.append(inputUnit);
-            } else {
+            } /*else {
                 throw new WrongInputDataException("Wrong input data or this math operation is not supported!");
-            }
+            }*/
         }
 
         stringNumbers.add(tempNumber.toString());
@@ -136,11 +125,10 @@ public final class DataParser {
      *
      * @param operatingNumbers ArrayList with the participants of the math operation.
      * @param checkOperator    boolean flag, which shows if there are correct math operator.
-     * @throws IncorrectInputDataException throws when there are any problems with the data.
      */
-    private void checkingDataCorrectness(ArrayList<String> operatingNumbers, boolean checkOperator) throws IncorrectInputDataException {
+    private void checkingDataCorrectness(ArrayList<String> operatingNumbers, boolean checkOperator)  {
         if (operatingNumbers.size() != 2 || operatingNumbers.contains("") || checkOperator == false) {
-            throw new IncorrectInputDataException("You've entered incorrect data!");
+           /* throw new IncorrectInputDataException("You've entered incorrect data!");*/
         }
     }
 

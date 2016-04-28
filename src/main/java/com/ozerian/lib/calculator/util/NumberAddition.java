@@ -1,39 +1,35 @@
 package com.ozerian.lib.calculator.util;
 
-import com.ozerian.lib.calculator.exceptions.IncorrectInputDataException;
-import com.ozerian.lib.calculator.interfaces.Addition;
+import com.ozerian.lib.calculator.interfaces.CalculatorOperation;
 
 /**
  * Class for addition number's data types.
  */
-public final class NumberAddition implements Addition {
+public final class NumberAddition implements CalculatorOperation {
 
     public static final int INDEX_OF_FIRST_NUMBER = 0;
     public static final int INDEX_OF_SECOND_NUMBER = 1;
     private DataParser parser;
-    private OperationRegister operationRegister;
     private StringBuilder operationResult = new StringBuilder();
+    private String firstOperand = parser.getStringNumbers().get(INDEX_OF_FIRST_NUMBER);
+    private String secondOperand = parser.getStringNumbers().get(INDEX_OF_SECOND_NUMBER);
+
 
     /**
      * Creation new object with parser and operationRegister.
      *
-     * @param parser           DataParser for checking data type.
-     * @param operationRegister OperationRegister for checking supported operations.
+     * @param parser DataParser for checking data type.
      */
-    public NumberAddition(DataParser parser, OperationRegister operationRegister) {
+    public NumberAddition(DataParser parser) {
         this.parser = parser;
-        this.operationRegister = operationRegister;
-        operationRegister.addOperation("+", this);
+        OperationRegister.addOperation("+", this);
     }
 
     /**
      * Checking data type and addition after definition.
-     *
-     * @throws IncorrectInputDataException Throws when there are problems with input data after some methods
-     *                                     and operations.
      */
-    @Override
-    public void add() throws IncorrectInputDataException {
+
+    public void add(String firstOperand, String secondOperand) {
         if ("int".equals(parser.getNumberType())) {
             int firstNumber = Integer.parseInt(parser.getStringNumbers().get(INDEX_OF_FIRST_NUMBER));
             int secondNumber = Integer.parseInt(parser.getStringNumbers().get(INDEX_OF_SECOND_NUMBER));
@@ -50,9 +46,9 @@ public final class NumberAddition implements Addition {
             float firstNumber = Float.parseFloat(parser.getStringNumbers().get(INDEX_OF_FIRST_NUMBER));
             float secondNumber = Float.parseFloat(parser.getStringNumbers().get(INDEX_OF_SECOND_NUMBER));
             addFloat(firstNumber, secondNumber);
-        } else {
+        } /*else {
             throw new IncorrectInputDataException("Impossible parsing!");
-        }
+        }*/
     }
 
     /**
@@ -109,16 +105,21 @@ public final class NumberAddition implements Addition {
 
     }
 
+
     /**
      * Override method for execution add operation.
-     *
-     * @throws IncorrectInputDataException Throws when there are problems with input data after some methods
-     *                                     and operations.
      */
     @Override
-    public void calculate() throws IncorrectInputDataException {
-        this.add();
+    public void calculate(String firstNumber, String secondNumber) {
+        this.add(firstNumber, secondNumber);
     }
+
+    @Override
+    public void addOperationToRegister(String operationSymbol) {
+        operationSymbol = "+";
+        OperationRegister.addOperation(operationSymbol, this);
+    }
+
 
     /**
      * Method returns the result of the executed operation.

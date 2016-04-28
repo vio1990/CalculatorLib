@@ -1,6 +1,5 @@
 package com.ozerian.lib.calculator.interfaces;
 
-import com.ozerian.lib.calculator.exceptions.IncorrectInputDataException;
 
 /**
  * Interface for common calculator operations.
@@ -11,12 +10,10 @@ public interface CalculatorOperation {
 
     /**
      * This method executes some math operation.
-     *
-     * @throws IncorrectInputDataException Throws when there are problems with input data after some methods
-     *                                     and operations.
      */
-    public void calculate() throws IncorrectInputDataException;
+    public void calculate(String firstOperand, String secondOperand);
 
+    public void addOperationToRegister(String operationSymbol);
 
     /**
      * Method returns the result of executed operation.

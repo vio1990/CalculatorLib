@@ -1,39 +1,31 @@
 package com.ozerian.lib.calculator.util;
 
-import com.ozerian.lib.calculator.exceptions.IncorrectInputDataException;
-import com.ozerian.lib.calculator.interfaces.Subtraction;
+import com.ozerian.lib.calculator.interfaces.CalculatorOperation;
 
 /**
  * Class for subtraction number's data types.
  */
-public final class NumberSubtraction implements Subtraction {
+public final class NumberSubtraction implements CalculatorOperation {
 
     public static final int INDEX_OF_FIRST_NUMBER = 0;
     public static final int INDEX_OF_SECOND_NUMBER = 1;
     private DataParser parser;
-    private OperationRegister operationRegister;
     private StringBuilder operationResult = new StringBuilder();
 
     /**
      * Creation new object with parser and operationRegister.
      *
-     * @param parser           DataParser for checking data type.
-     * @param operationRegister OperationRegister for checking supported operations.
+     * @param parser DataParser for checking data type.
      */
-    public NumberSubtraction(DataParser parser, OperationRegister operationRegister) {
+    public NumberSubtraction(DataParser parser) {
         this.parser = parser;
-        this.operationRegister = operationRegister;
-        operationRegister.addOperation("-", this);
     }
 
     /**
      * Checking data type and subtraction after definition.
-     *
-     * @throws IncorrectInputDataException Throws when there are problems with input data after some methods
-     *                                     and operations.
      */
-    @Override
-    public void subtract() throws IncorrectInputDataException {
+
+    public void subtract(String firstOperand, String secondOperand) {
         if ("int".equals(parser.getNumberType())) {
             int firstNumber = Integer.parseInt(parser.getStringNumbers().get(INDEX_OF_FIRST_NUMBER));
             int secondNumber = Integer.parseInt(parser.getStringNumbers().get(INDEX_OF_SECOND_NUMBER));
@@ -50,9 +42,9 @@ public final class NumberSubtraction implements Subtraction {
             float firstNumber = Float.parseFloat(parser.getStringNumbers().get(INDEX_OF_FIRST_NUMBER));
             float secondNumber = Float.parseFloat(parser.getStringNumbers().get(INDEX_OF_SECOND_NUMBER));
             subtractFloat(firstNumber, secondNumber);
-        } else {
+        } /*else {
             throw new IncorrectInputDataException("Impossible parsing!");
-        }
+        }*/
     }
 
     /**
@@ -109,13 +101,16 @@ public final class NumberSubtraction implements Subtraction {
 
     /**
      * Override method for execution add operation.
-     *
-     * @throws IncorrectInputDataException Throws when there are problems with input data after some methods
-     *                                     and operations.
      */
     @Override
-    public void calculate() throws IncorrectInputDataException {
-        this.subtract();
+    public void calculate(String firstOperand, String secondOperand) {
+        this.subtract(firstOperand, secondOperand);
+    }
+
+    @Override
+    public void addOperationToRegister(String operationSymbol) {
+        operationSymbol = "-";
+        OperationRegister.addOperation(operationSymbol, this);
     }
 
     /**
