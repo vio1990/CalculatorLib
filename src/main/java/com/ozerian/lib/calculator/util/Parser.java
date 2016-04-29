@@ -1,9 +1,19 @@
 package com.ozerian.lib.calculator.util;
 
+import java.util.ArrayList;
+
 /**
  * Class for parsing input string to double type value.
  */
 public class Parser {
+
+    private String operationName;
+
+    private String numberType;
+
+    private ArrayList<String> stringNumbers;
+
+
     /**
      * Parsing input string to double. Checking every
      * char of input string and change a condition of state
@@ -12,13 +22,13 @@ public class Parser {
      * @param inputExpression input string.
      * @return double result of state machine's parsing procedures.
      */
-    public Double parse(String inputExpression) {
+    public void parse(String inputExpression) {
         StateMachine stateMachine = new StateMachine();
         for (int i = 0; i < inputExpression.length(); i++) {
             char charOfInputExpression = inputExpression.charAt(i);
             stateMachine.next(charOfInputExpression);
+            operationName = stateMachine.getOperator();
         }
-        return stateMachine.getResult();
     }
 
     /**
@@ -45,12 +55,12 @@ public class Parser {
          *
          * @return double result.
          */
-        public Double getResult() {
-            Double result = null;
-            if (currentState == State.VALID_END || currentState == State.DECIMAL || currentState == State.NUMBER || currentState == State.EXP_NUMBER || currentState == State.POINT_AFTER) {
-                result = data.getNumber();
+        public String getOperator() {
+            String operatorType = null;
+            if (currentState == State.VALID_END || currentState == State.NUMBER) {
+                operatorType = data.getOperationType();
             }
-            return result;
+            return operatorType;
         }
 
         /**
@@ -59,129 +69,75 @@ public class Parser {
         public enum State {
             INIT {
                 @Override
-                public State next(char c, ParseData data) {
-                    if (c - '0' <= 9 && c - '0' >= 0) {
-                        data.addDigit(c - '0');
+                public State next(char partOfExpression, ParseData data) {
+                    if (partOfExpression - '0' <= 9 && partOfExpression - '0' >= 0) {
+                        data.numberForm(partOfExpression);
                         return NUMBER;
-                    } else if (c == '-' || c == '+') {
-                        data.setNegativeNumber(c == '-');
+                    } else if (partOfExpression == '-' || partOfExpression == '+') {
+                        data.numberForm(partOfExpression);
                         return SIGN;
-                    } else if (c == '.') {
-                        return POINT_BEFORE;
-                    } else if (c == ' ') {
+                    } else if (partOfExpression == ' ') {
                         return INIT;
                     }
                     return INVALID_END;
                 }
             }, NUMBER {
                 @Override
-                public State next(char c, ParseData data) {
-                    if (c - '0' <= 9 && c - '0' >= 0) {
-                        data.addDigit(c - '0');
+                public State next(char partOfExpression, ParseData data) {
+                    if (partOfExpression - '0' <= 9 && partOfExpression - '0' >= 0 || partOfExpression == '.') {
+                        data.numberForm(partOfExpression);
                         return NUMBER;
-                    } else if (c == '.') {
-                        return POINT_AFTER;
-                    } else if (c == ' ') {
-                        return VALID_END;
+                    } else if (OperationRegister.getOperations().containsKey(String.valueOf(partOfExpression))) {
+                        data.operationForm(partOfExpression);
+                        data.operandsNumbers.add(data.tempNumber.toString());
+                        data.tempNumber = new StringBuilder();
+                        return OPERATOR;
                     }
                     return INVALID_END;
                 }
             }, VALID_END {
                 @Override
-                public State next(char c, ParseData data) {
-                    if (c == ' ') {
+                public State next(char partOfExpression, ParseData data) {
+                    if (partOfExpression == ' ') {
                         return VALID_END;
                     }
                     return INVALID_END;
                 }
             }, INVALID_END {
                 @Override
-                public State next(char c, ParseData data) {
+                public State next(char partOfExpression, ParseData data) {
                     return INVALID_END;
                 }
             }, SIGN {
                 @Override
-                public State next(char c, ParseData data) {
-                    if (c - '0' <= 9 && c - '0' >= 0) {
-                        data.addDigit(c - '0');
+                public State next(char partOfExpression, ParseData data) {
+                    if (partOfExpression - '0' <= 9 && partOfExpression - '0' >= 0) {
+                        data.tempNumber = new StringBuilder();
+                        data.tempNumber.append(partOfExpression);
                         return NUMBER;
-                    } else if (c == '.') {
-                        return POINT_BEFORE;
                     }
                     return INVALID_END;
                 }
-            }, POINT_BEFORE {
+            }, OPERATOR {
                 @Override
-                public State next(char c, ParseData data) {
-                    if (c - '0' <= 9 && c - '0' >= 0) {
-                        data.addDecimalDigit(c - '0');
-                        return DECIMAL;
-                    }
-                    return INVALID_END;
-                }
-            }, POINT_AFTER {
-                @Override
-                public State next(char c, ParseData data) {
-                    if (c - '0' <= 9 && c - '0' >= 0) {
-                        data.addDecimalDigit(c - '0');
-                        return DECIMAL;
-                    } else if (c == 'e') {
-                        data.expExist(c == 'e');
-                        return EXP;
-                    } else if (c == ' ') {
-                        return VALID_END;
-                    }
-                    return INVALID_END;
-                }
-            }, DECIMAL {
-                @Override
-                public State next(char c, ParseData data) {
-                    if (c - '0' <= 9 && c - '0' >= 0) {
-                        data.addDecimalDigit(c - '0');
-                        return DECIMAL;
-                    } else if (c == ' ') {
-                        return VALID_END;
-                    } else if (c == 'e') {
-                        data.expExist(c == 'e');
-                        return EXP;
-                    }
-                    return INVALID_END;
-                }
-            }, EXP {
-                @Override
-                public State next(char c, ParseData data) {
-                    if (c == '-' || c == '+') {
-                        data.expSign(c == '-');
-                        return EXP_SIGN;
-                    } else if (c - '0' <= 9 && c - '0' >= 0) {
-                        data.addExpNumber(c - '0');
-                        return EXP_NUMBER;
-                    }
-                    return INVALID_END;
-                }
-            }, EXP_SIGN {
-                @Override
-                public State next(char c, ParseData data) {
-                    if (c - '0' <= 9 && c - '0' >= 0) {
-                        data.addExpNumber(c - '0');
-                        return EXP_NUMBER;
-                    }
-                    return INVALID_END;
-                }
-            }, EXP_NUMBER {
-                @Override
-                public State next(char c, ParseData data) {
-                    if (c - '0' <= 9 && c - '0' >= 0) {
-                        data.addExpNumber(c - '0');
-                        return EXP_NUMBER;
-                    } else if (c == ' ') {
-                        return VALID_END;
+                public State next(char partOfExpression, ParseData data) {
+                    if (partOfExpression - '0' <= 9 && partOfExpression - '0' >= 0) {
+                        data.numberForm(partOfExpression);
+                        return NUMBER;
+                    } else if (OperationRegister.getOperations().containsKey(String.valueOf(partOfExpression))) {
+                        data.operationForm(partOfExpression);
+                        if (OperationRegister.getOperations().containsKey(data.operationType.toString())) {
+                            return OPERATOR;
+                        } else {
+                            data.operationType.deleteCharAt(data.operationType.length() - 1);
+                            return SIGN;
+                        }
                     }
                     return INVALID_END;
                 }
             };
 
-            public abstract State next(char c, ParseData data);
+            public abstract State next(char partOfExpression, ParseData data);
         }
 
         /**
@@ -189,57 +145,24 @@ public class Parser {
          * with numbers.
          */
         private class ParseData {
-            private boolean negativeNumber = false;
-            private int number = 0;
-            private int decimal = 0;
-            private int expNumber = 0;
-            private int decimalQuantity = 0;
-            private boolean expExist = false;
-            private boolean negativeExp = false;
 
-            public void addDigit(int i) {
-                number = number * 10 + i;
+            private StringBuilder tempNumber = new StringBuilder();
+
+            private ArrayList<String> operandsNumbers = new ArrayList<>();
+
+            private StringBuilder operationType = new StringBuilder();
+
+            public void numberForm(char partOfNumber) {
+                tempNumber.append(partOfNumber);
             }
 
-            /**
-             * Generating the final result.
-             *
-             * @return double result of the computing.
-             */
-            public Double getNumber() {
-                double result = data.number;
-                result += data.decimal / Math.pow(10, data.decimalQuantity);
-                if (data.negativeNumber) {
-                    result *= -1;
-                }
-                if (data.expExist) {
-                    if (data.negativeExp) {
-                        data.expNumber *= -1;
-                    }
-                    result *= Math.pow(10, data.expNumber);
-                }
-                return result;
+
+            public void operationForm(char partOfExpression) {
+                operationType.append(partOfExpression);
             }
 
-            public void setNegativeNumber(boolean b) {
-                negativeNumber = b;
-            }
-
-            public void addDecimalDigit(int i) {
-                decimal = decimal * 10 + i;
-                decimalQuantity++;
-            }
-
-            public void expSign(boolean b) {
-                negativeExp = b;
-            }
-
-            public void addExpNumber(int i) {
-                expNumber = expNumber * 10 + i;
-            }
-
-            public void expExist(boolean b) {
-                expExist = b;
+            public String getOperationType() {
+                return operationType.toString();
             }
         }
     }

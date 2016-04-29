@@ -22,7 +22,6 @@ public final class NumberAddition implements CalculatorOperation {
      */
     public NumberAddition(DataParser parser) {
         this.parser = parser;
-        OperationRegister.addOperation("+", this);
     }
 
     /**
@@ -30,21 +29,25 @@ public final class NumberAddition implements CalculatorOperation {
      */
 
     public void add(String firstOperand, String secondOperand) {
+
+        firstOperand = parser.getStringNumbers().get(INDEX_OF_FIRST_NUMBER);
+        secondOperand = parser.getStringNumbers().get(INDEX_OF_SECOND_NUMBER);
+
         if ("int".equals(parser.getNumberType())) {
-            int firstNumber = Integer.parseInt(parser.getStringNumbers().get(INDEX_OF_FIRST_NUMBER));
-            int secondNumber = Integer.parseInt(parser.getStringNumbers().get(INDEX_OF_SECOND_NUMBER));
+            int firstNumber = Integer.parseInt(firstOperand);
+            int secondNumber = Integer.parseInt(secondOperand);
             addInt(firstNumber, secondNumber);
         } else if ("long".equals(parser.getNumberType())) {
-            long firstNumber = Long.parseLong(parser.getStringNumbers().get(INDEX_OF_FIRST_NUMBER));
-            long secondNumber = Long.parseLong(parser.getStringNumbers().get(INDEX_OF_SECOND_NUMBER));
+            long firstNumber = Long.parseLong(firstOperand);
+            long secondNumber = Long.parseLong(secondOperand);
             addLong(firstNumber, secondNumber);
         } else if ("double".equals(parser.getNumberType())) {
-            double firstNumber = Double.parseDouble(parser.getStringNumbers().get(INDEX_OF_FIRST_NUMBER));
-            double secondNumber = Double.parseDouble(parser.getStringNumbers().get(INDEX_OF_SECOND_NUMBER));
+            double firstNumber = Double.parseDouble(firstOperand);
+            double secondNumber = Double.parseDouble(secondOperand);
             addDouble(firstNumber, secondNumber);
         } else if ("float".equals(parser.getNumberType())) {
-            float firstNumber = Float.parseFloat(parser.getStringNumbers().get(INDEX_OF_FIRST_NUMBER));
-            float secondNumber = Float.parseFloat(parser.getStringNumbers().get(INDEX_OF_SECOND_NUMBER));
+            float firstNumber = Float.parseFloat(firstOperand);
+            float secondNumber = Float.parseFloat(secondOperand);
             addFloat(firstNumber, secondNumber);
         } /*else {
             throw new IncorrectInputDataException("Impossible parsing!");
@@ -102,9 +105,7 @@ public final class NumberAddition implements CalculatorOperation {
         String textResult = firstNumber + "+" + secondNumber + "=" + result;
         operationResult = new StringBuilder();
         operationResult.append(textResult);
-
     }
-
 
     /**
      * Override method for execution add operation.

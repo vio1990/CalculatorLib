@@ -1,8 +1,5 @@
 package com.ozerian.lib.calculator.model;
 
-import com.ozerian.lib.calculator.exceptions.IncorrectInputDataException;
-import com.ozerian.lib.calculator.exceptions.NotSupportedException;
-import com.ozerian.lib.calculator.exceptions.WrongInputDataException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -43,7 +40,7 @@ public class CalculatorTest {
         assertEquals(actual, expected);
     }
 
-    @Test(expectedExceptions = WrongInputDataException.class)
+  /*  @Test(expectedExceptions = WrongInputDataException.class)
     public void testExceptionWrongInputData() throws IncorrectInputDataException, NotSupportedException, WrongInputDataException {
         Calculator calculator = new Calculator();
         calculator.calculatorExecute("65464 - sdf");
@@ -53,6 +50,6 @@ public class CalculatorTest {
     public void testExceptionIncorrectData() throws IncorrectInputDataException, NotSupportedException, WrongInputDataException {
         Calculator calculator = new Calculator();
         calculator.calculatorExecute("65464");
-    }
+    }*/
 
 }
