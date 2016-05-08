@@ -2,13 +2,15 @@ package com.ozerian.lib.calculator.model;
 
 import com.ozerian.lib.calculator.util.DataParser;
 import com.ozerian.lib.calculator.util.NumberAddition;
-import com.ozerian.lib.calculator.util.OperationRegister;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 
 import static org.testng.Assert.assertEquals;
 
+/**
+ * Class for parsing!!!!!!!!
+ */
 public class DataParserTest {
 
     DataParser handler = new DataParser();
