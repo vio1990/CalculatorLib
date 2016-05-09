@@ -91,7 +91,6 @@ public final class NumberAddition implements CalculatorOperation {
         String textResult = firstNumber + "+" + secondNumber + "=" + result;
         operationResult = new StringBuilder();
         operationResult.append(textResult);
-
     }
 
     /**
@@ -111,7 +110,7 @@ public final class NumberAddition implements CalculatorOperation {
      * Override method for execution add operation.
      */
     @Override
-    public void calculate(String firstNumber, String secondNumber) {
+    public void  calculate(String firstNumber, String secondNumber) {
         this.add(firstNumber, secondNumber);
     }
 
@@ -120,7 +119,6 @@ public final class NumberAddition implements CalculatorOperation {
         operationSymbol = "+";
         OperationRegister.addOperation(operationSymbol, this);
     }
-
 
     /**
      * Method returns the result of the executed operation.

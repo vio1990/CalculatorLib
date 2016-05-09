@@ -9,10 +9,15 @@ package com.ozerian.lib.calculator.interfaces;
 public interface CalculatorOperation {
 
     /**
-     * This method executes some math operation.
+     * Method for description of execution some math operation.
      */
     public void calculate(String firstOperand, String secondOperand);
 
+    /**
+     * Addition appropriate math operation to OperationRegister.
+     *
+     * @param operationSymbol String value of math operation.
+     */
     public void addOperationToRegister(String operationSymbol);
 
     /**
