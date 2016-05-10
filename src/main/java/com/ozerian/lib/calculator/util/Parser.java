@@ -99,7 +99,7 @@ public final class Parser {
         }
 
         /**
-         * Appropriate State machine conditions.
+         * Appropriate State machine conditions, depending on input chars.
          */
         public enum State {
             INIT {
