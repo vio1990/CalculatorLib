@@ -20,7 +20,8 @@ public final class OperationRegister {
 
     /**
      * Addition a new math operation.
-     * @param operator String operator. For example, "+", "-", "/", "*" etc.
+     *
+     * @param operator      String operator. For example, "+", "-", "/", "*" etc.
      * @param mathOperation CalculatorOperation object with the logic of adding math operation.
      */
     public static void addOperation(String operator, CalculatorOperation mathOperation) {
@@ -29,6 +30,7 @@ public final class OperationRegister {
 
     /**
      * This method returns the HashMap with supported operations.
+     *
      * @return Map with supported operations.
      */
     public static Map<String, CalculatorOperation> getOperations() {

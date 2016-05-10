@@ -173,7 +173,6 @@ public final class Parser {
             };
 
             public abstract State next(char partOfExpression, ParseData data);
-
         }
 
         /**
@@ -199,7 +198,6 @@ public final class Parser {
             public String getOperationType() {
                 return operationType.toString();
             }
-
         }
     }
 
@@ -207,8 +205,8 @@ public final class Parser {
      * Method tries to parse input String numbers and defines its type,
      * otherwise it would be exception.
      *
-     * @param firstNumber
-     * @param secondNumber
+     * @param firstNumber  String first operand.
+     * @param secondNumber String second operand.
      */
     public void numbersTypeCheck(String firstNumber, String secondNumber) {
 
