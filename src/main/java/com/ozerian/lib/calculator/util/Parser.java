@@ -14,8 +14,9 @@ public final class Parser {
 
     private String numberType;
 
-    private ArrayList<String> stringNumbers;
+    private String firstNumber;
 
+    private String secondNumber;
 
     /**
      * Parsing input string to double. Checking every
@@ -31,10 +32,21 @@ public final class Parser {
         for (int i = 0; i < inputExpression.length(); i++) {
             char charOfInputExpression = inputExpression.charAt(i);
             stateMachine.next(charOfInputExpression);
-            operationName = stateMachine.getOperator();
-            stringNumbers = stateMachine.getNumbers();
-            numbersTypeCheck(stringNumbers);
         }
+        operationName = stateMachine.getOperator();
+        firstNumber = stateMachine.getNumbers().get(INDEX_OF_FIRST_NUMBER);
+        secondNumber = stateMachine.getNumbers().get(INDEX_OF_SECOND_NUMBER);
+        numbersTypeCheck(firstNumber, secondNumber);
+    }
+
+    /**
+     * This method clear all of parser parameters for next executions.
+     */
+    public void clearData() {
+        operationName = null;
+        numberType = null;
+        firstNumber = null;
+        secondNumber = null;
     }
 
     /**
@@ -54,6 +66,7 @@ public final class Parser {
         }
 
         private State currentState = State.INIT;
+
         private ParseData data = new ParseData();
 
         /**
@@ -77,7 +90,10 @@ public final class Parser {
         public ArrayList<String> getNumbers() {
             ArrayList<String> operatorType = new ArrayList();
             if (currentState == State.VALID_END || currentState == State.NUMBER) {
+                data.operandsNumbers.add(data.tempNumber.toString());
                 operatorType = data.operandsNumbers;
+            } else {
+                throw new IllegalArgumentException("Incorrect input data!");
             }
             return operatorType;
         }
@@ -131,7 +147,6 @@ public final class Parser {
                 @Override
                 public State next(char partOfExpression, ParseData data) {
                     if (partOfExpression - '0' <= 9 && partOfExpression - '0' >= 0) {
-                        data.tempNumber = new StringBuilder();
                         data.tempNumber.append(partOfExpression);
                         return NUMBER;
                     }
@@ -149,6 +164,7 @@ public final class Parser {
                             return OPERATOR;
                         } else {
                             data.operationType.deleteCharAt(data.operationType.length() - 1);
+                            data.tempNumber.append(partOfExpression);
                             return SIGN;
                         }
                     }
@@ -157,6 +173,7 @@ public final class Parser {
             };
 
             public abstract State next(char partOfExpression, ParseData data);
+
         }
 
         /**
@@ -182,19 +199,19 @@ public final class Parser {
             public String getOperationType() {
                 return operationType.toString();
             }
+
         }
     }
 
     /**
-     * Trying to parse input data to supported data type. In this way
-     * if there are no NumberFormatException - parsing is correct.
+     * Method tries to parse input String numbers and defines its type,
+     * otherwise it would be exception.
      *
-     * @param numbers ArrayList with participants of the math operation.
+     * @param firstNumber
+     * @param secondNumber
      */
-    public void numbersTypeCheck(ArrayList<String> numbers) {
+    public void numbersTypeCheck(String firstNumber, String secondNumber) {
 
-        String firstNumber = numbers.get(INDEX_OF_FIRST_NUMBER);
-        String secondNumber = numbers.get(INDEX_OF_SECOND_NUMBER);
         String numberTypes = new String();
         boolean checkFlag = false;
 
@@ -258,15 +275,6 @@ public final class Parser {
     }
 
     /**
-     * Method returns the List with values of the participants of the math operation.
-     *
-     * @return ArrayList with values of the participants of the math operation..
-     */
-    public ArrayList<String> getStringNumbers() {
-        return stringNumbers;
-    }
-
-    /**
      * Method shows participants' data type.
      *
      * @return String with data type.
@@ -275,5 +283,21 @@ public final class Parser {
         return numberType;
     }
 
+    /**
+     * Method returns first operand.
+     *
+     * @return String first participants of math operation.
+     */
+    public String getFirstNumber() {
+        return firstNumber;
+    }
 
+    /**
+     * Method returns second operand.
+     *
+     * @return String second participants of math operation.
+     */
+    public String getSecondNumber() {
+        return secondNumber;
+    }
 }

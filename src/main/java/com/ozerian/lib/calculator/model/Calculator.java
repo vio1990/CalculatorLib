@@ -1,10 +1,10 @@
 package com.ozerian.lib.calculator.model;
 
 import com.ozerian.lib.calculator.interfaces.CalculatorOperation;
-import com.ozerian.lib.calculator.util.DataParser;
 import com.ozerian.lib.calculator.util.NumberAddition;
 import com.ozerian.lib.calculator.util.NumberSubtraction;
 import com.ozerian.lib.calculator.util.OperationRegister;
+import com.ozerian.lib.calculator.util.Parser;
 
 /**
  * Util Class for calculation different math operations with different types of data.
@@ -16,7 +16,7 @@ import com.ozerian.lib.calculator.util.OperationRegister;
  */
 public final class Calculator {
 
-    private DataParser parser = new DataParser();
+    private Parser parser = new Parser();
 
     private NumberAddition numberAddition = new NumberAddition(parser);
     private NumberSubtraction numberSubtraction = new NumberSubtraction(parser);
@@ -26,15 +26,13 @@ public final class Calculator {
      *
      * @param inputExpression String with math expression.
      * @return String with total result of the operation.
-
-
      */
     public String calculatorExecute(String inputExpression) {
         StringBuilder totalResult = new StringBuilder();
-        parser.inputDataHandling(inputExpression);
-        parser.numbersTypeCheck(parser.getStringNumbers());
+        parser.parse(inputExpression);
+        parser.numbersTypeCheck(parser.getFirstNumber(), parser.getSecondNumber());
         operatorCheckAndOperate(parser, totalResult);
-        parser.getStringNumbers().clear();
+        parser.clearData();
         return totalResult.toString();
     }
 
@@ -43,21 +41,14 @@ public final class Calculator {
      *
      * @param parser DataParser for handling the input data.
      * @param result StringBuilder for formation of the total result after calculation.
-
      */
-    public void operatorCheckAndOperate(DataParser parser, StringBuilder result) {
-        if (OperationRegister.getOperations().containsKey(parser.getOperationFlag())) {
-            CalculatorOperation mathOperation = OperationRegister.getOperations().get(parser.getOperationFlag());
-            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-
-            /*mathOperation.calculate();*/
-
-
-            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    public void operatorCheckAndOperate(Parser parser, StringBuilder result) {
+        if (OperationRegister.getOperations().containsKey(parser.getOperationName())) {
+            CalculatorOperation mathOperation = OperationRegister.getOperations().get(parser.getOperationName());
+            mathOperation.calculate(parser.getFirstNumber(), parser.getSecondNumber());
             result.append(mathOperation.getOperationResult());
-        /*} else {
-            throw new NotSupportedException("This math operation is not supported!");*/
+        } else {
+            throw new UnsupportedOperationException("This math operation is not supported!");
         }
     }
 
@@ -67,7 +58,7 @@ public final class Calculator {
      *
      * @return DataParser object.
      */
-    public DataParser getParser() {
+    public Parser getParser() {
         return parser;
     }
 }

@@ -7,21 +7,17 @@ import com.ozerian.lib.calculator.interfaces.CalculatorOperation;
  */
 public final class NumberAddition implements CalculatorOperation {
 
-    public static final int INDEX_OF_FIRST_NUMBER = 0;
-    public static final int INDEX_OF_SECOND_NUMBER = 1;
-    private DataParser parser;
+    private Parser parser;
     private StringBuilder operationResult = new StringBuilder();
-    private String firstOperand = parser.getStringNumbers().get(INDEX_OF_FIRST_NUMBER);
-    private String secondOperand = parser.getStringNumbers().get(INDEX_OF_SECOND_NUMBER);
-
 
     /**
      * Creation new object with parser and operationRegister.
      *
      * @param parser DataParser for checking data type.
      */
-    public NumberAddition(DataParser parser) {
+    public NumberAddition(Parser parser) {
         this.parser = parser;
+        addOperationToRegister("+");
     }
 
     /**
@@ -29,9 +25,6 @@ public final class NumberAddition implements CalculatorOperation {
      */
 
     public void add(String firstOperand, String secondOperand) {
-
-        firstOperand = parser.getStringNumbers().get(INDEX_OF_FIRST_NUMBER);
-        secondOperand = parser.getStringNumbers().get(INDEX_OF_SECOND_NUMBER);
 
         if ("int".equals(parser.getNumberType())) {
             int firstNumber = Integer.parseInt(firstOperand);
@@ -49,9 +42,9 @@ public final class NumberAddition implements CalculatorOperation {
             float firstNumber = Float.parseFloat(firstOperand);
             float secondNumber = Float.parseFloat(secondOperand);
             addFloat(firstNumber, secondNumber);
-        } /*else {
-            throw new IncorrectInputDataException("Impossible parsing!");
-        }*/
+        } else {
+            throw new UnsupportedOperationException("Not supported data type!");
+        }
     }
 
     /**
@@ -110,13 +103,12 @@ public final class NumberAddition implements CalculatorOperation {
      * Override method for execution add operation.
      */
     @Override
-    public void  calculate(String firstNumber, String secondNumber) {
+    public void calculate(String firstNumber, String secondNumber) {
         this.add(firstNumber, secondNumber);
     }
 
     @Override
     public void addOperationToRegister(String operationSymbol) {
-        operationSymbol = "+";
         OperationRegister.addOperation(operationSymbol, this);
     }
 

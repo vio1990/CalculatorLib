@@ -7,9 +7,7 @@ import com.ozerian.lib.calculator.interfaces.CalculatorOperation;
  */
 public final class NumberSubtraction implements CalculatorOperation {
 
-    public static final int INDEX_OF_FIRST_NUMBER = 0;
-    public static final int INDEX_OF_SECOND_NUMBER = 1;
-    private DataParser parser;
+    private Parser parser;
     private StringBuilder operationResult = new StringBuilder();
 
     /**
@@ -17,8 +15,9 @@ public final class NumberSubtraction implements CalculatorOperation {
      *
      * @param parser DataParser for checking data type.
      */
-    public NumberSubtraction(DataParser parser) {
+    public NumberSubtraction(Parser parser) {
         this.parser = parser;
+        addOperationToRegister("-");
     }
 
     /**
@@ -26,25 +25,26 @@ public final class NumberSubtraction implements CalculatorOperation {
      */
 
     public void subtract(String firstOperand, String secondOperand) {
+
         if ("int".equals(parser.getNumberType())) {
-            int firstNumber = Integer.parseInt(parser.getStringNumbers().get(INDEX_OF_FIRST_NUMBER));
-            int secondNumber = Integer.parseInt(parser.getStringNumbers().get(INDEX_OF_SECOND_NUMBER));
+            int firstNumber = Integer.parseInt(firstOperand);
+            int secondNumber = Integer.parseInt(secondOperand);
             subtractInt(firstNumber, secondNumber);
         } else if ("long".equals(parser.getNumberType())) {
-            long firstNumber = Long.parseLong(parser.getStringNumbers().get(INDEX_OF_FIRST_NUMBER));
-            long secondNumber = Long.parseLong(parser.getStringNumbers().get(INDEX_OF_SECOND_NUMBER));
+            long firstNumber = Long.parseLong(firstOperand);
+            long secondNumber = Long.parseLong(secondOperand);
             subtractLong(firstNumber, secondNumber);
         } else if ("double".equals(parser.getNumberType())) {
-            double firstNumber = Double.parseDouble(parser.getStringNumbers().get(INDEX_OF_FIRST_NUMBER));
-            double secondNumber = Double.parseDouble(parser.getStringNumbers().get(INDEX_OF_SECOND_NUMBER));
+            double firstNumber = Double.parseDouble(firstOperand);
+            double secondNumber = Double.parseDouble(secondOperand);
             subtractDouble(firstNumber, secondNumber);
         } else if ("float".equals(parser.getNumberType())) {
-            float firstNumber = Float.parseFloat(parser.getStringNumbers().get(INDEX_OF_FIRST_NUMBER));
-            float secondNumber = Float.parseFloat(parser.getStringNumbers().get(INDEX_OF_SECOND_NUMBER));
+            float firstNumber = Float.parseFloat(firstOperand);
+            float secondNumber = Float.parseFloat(secondOperand);
             subtractFloat(firstNumber, secondNumber);
-        } /*else {
-            throw new IncorrectInputDataException("Impossible parsing!");
-        }*/
+        } else {
+            throw new UnsupportedOperationException("Not supported data type!");
+        }
     }
 
     /**
@@ -107,9 +107,13 @@ public final class NumberSubtraction implements CalculatorOperation {
         this.subtract(firstOperand, secondOperand);
     }
 
+    /**
+     * Addition operation for support in calculator.
+     *
+     * @param operationSymbol String value of math operation.
+     */
     @Override
     public void addOperationToRegister(String operationSymbol) {
-        operationSymbol = "-";
         OperationRegister.addOperation(operationSymbol, this);
     }
 

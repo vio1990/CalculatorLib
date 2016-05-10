@@ -20,7 +20,6 @@ public class CalculatorTest {
         String actual = calculator.calculatorExecute("5.3+3");
         String expected = "5.3+3.0=8.3";
         assertEquals(actual, expected);
-
     }
 
     @Test
@@ -29,7 +28,22 @@ public class CalculatorTest {
         String actual = calculator.calculatorExecute("5-8");
         String expected = "5-8=-3";
         assertEquals(actual, expected);
+    }
 
+    @Test
+    public void testCalculatorSubtractionInt2() throws Exception {
+        Calculator calculator = new Calculator();
+        String actual = calculator.calculatorExecute("-5-8");
+        String expected = "-5-8=-13";
+        assertEquals(actual, expected);
+    }
+
+    @Test
+    public void testCalculatorSubtractionInt3() throws Exception {
+        Calculator calculator = new Calculator();
+        String actual = calculator.calculatorExecute("-5--8");
+        String expected = "-5--8=3";
+        assertEquals(actual, expected);
     }
 
     @Test
@@ -40,16 +54,16 @@ public class CalculatorTest {
         assertEquals(actual, expected);
     }
 
-  /*  @Test(expectedExceptions = WrongInputDataException.class)
-    public void testExceptionWrongInputData() throws IncorrectInputDataException, NotSupportedException, WrongInputDataException {
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void testExceptionIllegalArgument() {
         Calculator calculator = new Calculator();
         calculator.calculatorExecute("65464 - sdf");
     }
 
-    @Test(expectedExceptions = IncorrectInputDataException.class)
-    public void testExceptionIncorrectData() throws IncorrectInputDataException, NotSupportedException, WrongInputDataException {
+    @Test(expectedExceptions = UnsupportedOperationException.class)
+    public void testExceptionIllegalArgument2() {
         Calculator calculator = new Calculator();
         calculator.calculatorExecute("65464");
-    }*/
+    }
 
 }
