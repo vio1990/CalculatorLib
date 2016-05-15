@@ -14,7 +14,7 @@ import com.ozerian.lib.calculator.util.Parser;
  * would be used.
  * This calculator supports basic operations, such as Addition and Subtraction.
  */
-public final class Calculator {
+public class Calculator {
 
     private Parser parser = new Parser();
 
